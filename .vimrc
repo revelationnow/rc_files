@@ -90,6 +90,8 @@ Plugin 'yggdroot/indentline'
 
 Plugin 'bling/vim-bufferline'
 
+Plugin 'hari-rangarajan/CCTree'
+Plugin 'DoxygenToolkit.vim'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -123,6 +125,9 @@ let g:bufferline_rotate = 1
 
 " YouCompleteMe
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/youcompleteme/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+
+" ctrlp
+let g:ctrlp_max_depth = 8
 
 python3 from powerline.vim import setup as powerline_setup
 python3 powerline_setup()
@@ -517,8 +522,31 @@ autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
 " Show a vertical line at the 120th character
-set colorcolumn=120
+set colorcolumn=121
 
 " Enter and exit paste mode
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
+
+" Autocmd for File template
+autocmd bufnewfile *.c so ~/qcom_c_file_template.txt
+
+" Shortcut to P4 edit current file
+nnoremap <F3> :!p4 edit '%:p' <CR>
+
+" Cscope
+source ~/.vim/cscope_map.vim
+
+" Taglist
+let g:Tlist_Use_Right_Window = 1
+
+" Doxygen formatting
+let g:DoxygenToolkit_startCommentTag = "/*! "
+let g:DoxygenToolkit_startCommentBlock = "/*! "
+let g:DoxygenToolkit_interCommentTag = "  "
+let g:DoxygenToolkit_interCommentBlock = "  "
+let g:DoxygenToolkit_briefTag_pre = "@brief\n"
+let g:DoxygenToolkit_briefTag_post = "\n  @details\n"
+let g:DoxygenToolkit_templateParamTag_post = "\n"
+let g:DoxygenToolkit_paramTag_post = "\n"
+let g:DoxygenToolkit_returnTag = "@return\n"
